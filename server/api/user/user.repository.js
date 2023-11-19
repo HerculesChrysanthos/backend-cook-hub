@@ -5,7 +5,7 @@ async function registerUser(user) {
 }
 
 async function findUser(email) {
-  return User.findOne({ email });
+  return User.findOne({ email }).lean().exec();
 }
 
 module.exports = {

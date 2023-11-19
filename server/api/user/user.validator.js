@@ -15,6 +15,14 @@ const registerSchema = Joi.object({
   }).required(),
 });
 
+const loginSchema = Joi.object({
+  body: Joi.object({
+    email: Joi.string().email().lowercase().required(),
+    password: Joi.string().min(8).max(16).required(),
+  }),
+}).required();
+
 module.exports = {
   registerSchema,
+  loginSchema,
 };

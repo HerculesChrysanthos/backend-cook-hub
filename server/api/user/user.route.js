@@ -12,11 +12,10 @@ router.post(
   userController.register
 );
 
-// router.get('/', userController.getUsers);
-// router.post(
-//   '/login',
-//   // validator(userValidator.loginSchema),
-//   userController.login
-// );
+router.post(
+  '/login',
+  validator(userValidator.loginSchema),
+  userController.login
+);
 
 module.exports = router;

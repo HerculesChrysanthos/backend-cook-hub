@@ -22,32 +22,30 @@ async function register(req, res, next) {
   }
 }
 
-// async function login(req, res, next) {
-//   try {
-//     //const email = req.body.email;
-//     //const password = req.body.password;
+async function login(req, res, next) {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
 
-//     //const dbUser = await userService.login(email, password);
+    const dbUser = await userService.login(email, password);
 
-//     //const response = userHelper.buildUserResponse(dbUser);
+    const response = userHelper.buildUserResponse(dbUser);
 
-//     const us = await User.find({ name: 'a' });
+    return res.status(200).json(response);
+  } catch (error) {
+    if (error.message === 'User not found') {
+      error.status = 404;
+    }
 
-//     return res.status(200).json(us);
-//   } catch (error) {
-//     if (error.message === 'User not found') {
-//       error.status = 404;
-//     }
+    if (error.message === 'Invalid password') {
+      error.status = 401;
+    }
 
-//     if (error.message === 'Invalid password') {
-//       error.status = 401;
-//     }
-
-//     return next(error);
-//   }
-// }
+    return next(error);
+  }
+}
 
 module.exports = {
   register,
-  //login,
+  login,
 };

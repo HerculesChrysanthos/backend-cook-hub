@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const userRoute = require('./api/user/user.route');
+const userRoute = require('./server/api/user/user.route');
 
 app.use(morgan('dev'));
 
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', userRoute);
+app.use('/api/users', userRoute);
 
 app.use((req, res, next) => {
   const error = new Error('Not Found');

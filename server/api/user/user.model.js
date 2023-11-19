@@ -21,9 +21,13 @@ const userSchema = mongoose.Schema(
     },
     likedRecipesCount: {
       type: Number,
+      min: 0,
+      default: 0,
     },
     createdRecipesCount: {
       type: Number,
+      min: 0,
+      default: 0,
     },
   },
   {

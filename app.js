@@ -1,4 +1,5 @@
 const express = require('express');
+const timeout = require('express-timeout-handler');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -30,6 +31,17 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(
+  timeout.handler({
+    timeout: 10000, // 10 seconds in milliseconds
+    onTimeout: function (req, res, next) {
+      const error = new Error('Request Timeout');
+      error.status = 408;
+      next(error);
+    },
+  })
+);
 
 app.use('/api/users', userRoute);
 

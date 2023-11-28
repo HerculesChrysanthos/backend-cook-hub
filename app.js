@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const userRoute = require('./server/api/user/user.route');
+const categoryRouter = require('./server/api/category/category.route');
 
 app.use(morgan('dev'));
 
@@ -44,6 +45,7 @@ app.use(
 );
 
 app.use('/api/users', userRoute);
+app.use('/api/categories', categoryRouter);
 
 app.use((req, res, next) => {
   const error = new Error('Not Found');

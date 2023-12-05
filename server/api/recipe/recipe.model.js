@@ -62,9 +62,13 @@ const recipeSchema = mongoose.Schema(
     ],
     ingredients: [
       {
-        ingredient: {
-          type: mongoose.Types.ObjectId,
-          ref: 'Ingredient',
+        // ingredient: {
+        //   type: mongoose.Types.ObjectId,
+        //   ref: 'Ingredient',
+        // },
+        name: {
+          type: String,
+          required: true,
         },
         quantity: {
           type: Number,

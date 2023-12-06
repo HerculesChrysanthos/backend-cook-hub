@@ -1,4 +1,4 @@
-const MEASURMENTS = ['kg', 'ml'];
+const MEASURMENTS = ['kg', 'ml', 'ΤΕΜ'];
 
 module.exports = {
   MEASURMENTS,

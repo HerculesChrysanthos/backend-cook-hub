@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const userRoute = require('./server/api/user/user.route');
-const categoryRouter = require('./server/api/category/category.route');
+const userRouter = require('./server/api/user/user.router');
+const categoryRouter = require('./server/api/category/category.router');
+const subcategoryRouter = require('./server/api/subcategory/subcategory.router');
+const recipeRouter = require('./server/api/recipe/recipe.router');
 
 app.use(morgan('dev'));
 
@@ -44,8 +46,10 @@ app.use(
   })
 );
 
-app.use('/api/users', userRoute);
+app.use('/api/users', userRouter);
 app.use('/api/categories', categoryRouter);
+app.use('/api/subcategories', subcategoryRouter);
+app.use('/api/recipes', recipeRouter);
 
 app.use((req, res, next) => {
   const error = new Error('Not Found');

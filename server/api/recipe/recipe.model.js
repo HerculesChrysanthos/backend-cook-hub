@@ -38,18 +38,14 @@ const recipeSchema = mongoose.Schema(
       required: true,
       min: 1,
     },
-    categories: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: 'Category',
-      },
-    ],
-    subcategories: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: 'Subcategory',
-      },
-    ],
+    category: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Category',
+    },
+    subcategory: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Subcategory',
+    },
     keywords: [
       {
         type: mongoose.Types.ObjectId,

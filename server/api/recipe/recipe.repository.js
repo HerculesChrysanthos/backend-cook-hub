@@ -1,7 +1,7 @@
 const Recipe = require('./recipe.model');
 
-async function getRecipes(page, limit, search) {
-  return Recipe.find(search)
+async function getRecipes(page, limit, query) {
+  return Recipe.find(query)
     .populate('user', 'name surname')
     .populate('category', 'name')
     .populate('subcategory', 'name')
@@ -22,8 +22,14 @@ async function getRecipeById(recipeId) {
       .exec()
   );
 }
+
+async function getRecipesCount(query) {
+  return Recipe.countDocuments(query);
+}
+
 module.exports = {
   //getRecipesBySubcategoryId,
   getRecipes,
   getRecipeById,
+  getRecipesCount,
 };

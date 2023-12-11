@@ -4,20 +4,21 @@ async function getRecipes(req, res, next) {
   try {
     const page = req.query.page || 0;
     const limit = req.query.limit || 9;
+
+    const categoryId = req.query.categoryId;
     const subcategoryId = req.query.subcategoryId;
 
-    // if (subcategoryId) {
-    //   const recipesBySubcategoryId =
-    //     await recipeService.getRecipesBySubcategoryId(
-    //       page,
-    //       limit,
-    //       subcategoryId
-    //     );
+    const searchQuery = {};
 
-    //   return res.status(200).json(recipesBySubcategoryId);
-    // }
+    if (categoryId) {
+      searchQuery.category = categoryId;
+    }
 
-    const recipes = await recipeService.getRecipes(page, limit, subcategoryId);
+    if (subcategoryId) {
+      searchQuery.subcategory = subcategoryId;
+    }
+
+    const recipes = await recipeService.getRecipes(page, limit, searchQuery);
 
     return res.status(200).json(recipes);
   } catch (error) {
@@ -25,6 +26,19 @@ async function getRecipes(req, res, next) {
   }
 }
 
+async function getRecipeById(req, res, next) {
+  try {
+    const recipeId = req.params.recipeId;
+
+    const recipe = await recipeService.getRecipeById(recipeId);
+
+    return res.status(200).json(recipe);
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getRecipes,
+  getRecipeById,
 };

@@ -1,16 +1,14 @@
 const recipeRepository = require('./recipe.repository');
 
-async function getRecipes(page, limit, subcategoryId) {
-  const dbRecipes = await recipeRepository.getRecipes(
-    page,
-    limit,
-    subcategoryId
-  );
+async function getRecipes(page, limit, searchQuery) {
+  return recipeRepository.getRecipes(page, limit, searchQuery);
+}
 
-  //   const recipes =
-  return dbRecipes;
+async function getRecipeById(recipeId) {
+  return recipeRepository.getRecipeById(recipeId);
 }
 
 module.exports = {
   getRecipes,
+  getRecipeById,
 };

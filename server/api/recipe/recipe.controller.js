@@ -7,6 +7,7 @@ async function getRecipes(req, res, next) {
 
     const categoryId = req.query.categoryId;
     const subcategoryId = req.query.subcategoryId;
+    const tagId = req.query.tagId;
 
     const searchQuery = {};
 
@@ -16,6 +17,10 @@ async function getRecipes(req, res, next) {
 
     if (subcategoryId) {
       searchQuery.subcategory = subcategoryId;
+    }
+
+    if (tagId) {
+      searchQuery.tags = tagId;
     }
 
     const recipes = await recipeService.getRecipes(page, limit, searchQuery);

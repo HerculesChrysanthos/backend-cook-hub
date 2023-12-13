@@ -10,6 +10,7 @@ const userRouter = require('./server/api/user/user.router');
 const categoryRouter = require('./server/api/category/category.router');
 const subcategoryRouter = require('./server/api/subcategory/subcategory.router');
 const recipeRouter = require('./server/api/recipe/recipe.router');
+const tagRouter = require('./server/api/tag/tag.router');
 
 app.use(morgan('dev'));
 
@@ -50,6 +51,7 @@ app.use('/api/users', userRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/subcategories', subcategoryRouter);
 app.use('/api/recipes', recipeRouter);
+app.use('/api/tags', tagRouter);
 
 app.use((req, res, next) => {
   const error = new Error('Not Found');

@@ -5,7 +5,7 @@ async function getRecipes(page, limit, query) {
     .populate('user', 'name surname')
     .populate('category', 'name')
     .populate('subcategory', 'name')
-    .populate('keywords', 'name')
+    .populate('tags', 'name')
     .skip(page)
     .limit(limit)
     .lean()
@@ -13,14 +13,12 @@ async function getRecipes(page, limit, query) {
 }
 
 async function getRecipeById(recipeId) {
-  return (
-    Recipe.findById(recipeId)
-      .populate('user', 'name surname')
-      .populate('category', 'name')
-      .populate('subcategory', 'name')
-      //.populate('keywords', 'name')
-      .exec()
-  );
+  return Recipe.findById(recipeId)
+    .populate('user', 'name surname')
+    .populate('category', 'name')
+    .populate('subcategory', 'name')
+    .populate('tags', 'name')
+    .exec();
 }
 
 async function getRecipesCount(query) {
@@ -28,7 +26,6 @@ async function getRecipesCount(query) {
 }
 
 module.exports = {
-  //getRecipesBySubcategoryId,
   getRecipes,
   getRecipeById,
   getRecipesCount,

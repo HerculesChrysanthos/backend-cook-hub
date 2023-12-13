@@ -46,10 +46,10 @@ const recipeSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'Subcategory',
     },
-    keywords: [
+    tags: [
       {
         type: mongoose.Types.ObjectId,
-        ref: 'Keyword',
+        ref: 'Tag',
       },
     ],
     ingredients: [

@@ -41,6 +41,11 @@ async function getCategoriesWithSubcategories() {
         },
       },
     },
+    {
+      $sort: {
+        name: 1,
+      },
+    },
   ]).exec();
 }
 

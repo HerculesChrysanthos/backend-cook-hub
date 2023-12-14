@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { MEASURMENTS } = require('../constants');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const recipeSchema = mongoose.Schema(
   {
@@ -7,7 +8,7 @@ const recipeSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'User',
     },
-    recipeId: {
+    friendlyId: {
       type: Number,
       unique: true,
     },
@@ -77,5 +78,10 @@ const recipeSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+recipeSchema.plugin(AutoIncrement, {
+  inc_field: 'friendlyId',
+  id: 'Recipe',
+});
 
 module.exports = mongoose.model('Recipe', recipeSchema);

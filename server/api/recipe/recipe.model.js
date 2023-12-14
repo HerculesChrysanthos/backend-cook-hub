@@ -62,14 +62,14 @@ const recipeSchema = mongoose.Schema(
           type: String,
           required: true,
         },
-        quantity: {
-          type: Number,
-          min: 0,
-        },
-        measurmentType: {
-          type: String,
-          enum: MEASURMENTS,
-        },
+        // quantity: {
+        //   type: Number,
+        //   min: 0,
+        // },
+        // measurmentType: {
+        //   type: String,
+        //   enum: MEASURMENTS,
+        // },
       },
     ],
   },

@@ -64,11 +64,26 @@ async function getMyRecipes(req, res, next) {
 //   } catch (error) {
 //     return next(error);
 //   }
-try {
-} catch (error) {} // }
+// try {
+// } catch (error) {} // }
+
+async function createRecipe(req, res, next) {
+  try {
+    const recipe = req.body;
+    recipe.user = req.user.userId;
+    const createdRecipe = await recipeService.createRecipe(
+      req.body,
+      req.files[0]
+    );
+    return res.status(201).json(createdRecipe);
+  } catch (error) {
+    return next(error);
+  }
+}
 
 module.exports = {
   getRecipes,
   getRecipeById,
   getMyRecipes,
+  createRecipe,
 };

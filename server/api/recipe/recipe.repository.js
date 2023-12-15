@@ -25,8 +25,13 @@ async function getRecipesCount(query) {
   return Recipe.countDocuments(query);
 }
 
+async function createRecipe(recipe) {
+  return Recipe.create(recipe);
+}
+
 module.exports = {
   getRecipes,
   getRecipeById,
   getRecipesCount,
+  createRecipe,
 };

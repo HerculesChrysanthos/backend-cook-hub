@@ -23,6 +23,8 @@ mongoose.connect(
     '@cluster0.ihgxjrg.mongodb.net/cook-hub?retryWrites=true&w=majority'
 );
 
+//mongoose.set('debug', true);
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -38,7 +40,7 @@ app.use((req, res, next) => {
 
 app.use(
   timeout.handler({
-    timeout: 10000, // 10 seconds in milliseconds
+    timeout: 15000, // 15 seconds in milliseconds
     onTimeout: function (req, res, next) {
       const error = new Error('Request Timeout');
       error.status = 408;

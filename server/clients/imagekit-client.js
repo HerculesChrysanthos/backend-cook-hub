@@ -1,28 +1,28 @@
 const ImageKit = require('imagekit');
 require('dotenv').config();
 
-async function uploadImage(image) {
+async function uploadImage(buffer, name) {
   try {
-    var imagekit = new ImageKit({
+    const imagekit = new ImageKit({
       publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
       privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
       urlEndpoint: 'https://ik.imagekit.io/cookhub/',
     });
 
-    const imageUploaded = await imagekit.upload(
+    imagekit.upload(
       {
-        file: image.buffer,
-        fileName: image.originalname,
+        file: buffer,
+        fileName: name,
+        useUniqueFileName: false,
       },
       function (error, result) {
         if (error) console.log(error);
         else console.log(result);
       }
     );
-
-    return imageUploaded.url;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 

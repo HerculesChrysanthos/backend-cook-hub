@@ -36,7 +36,7 @@ function prepareImages(maxImages) {
     }).array('image', maxImages)(req, res, (err) => {
       if (err) {
         if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-          err.message = 'File limit of 10 images has exceeded.';
+          err.message = 'File limit of 1 image has exceeded.';
           err.status = 400;
         }
 

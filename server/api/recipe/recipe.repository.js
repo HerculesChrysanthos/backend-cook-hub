@@ -3,6 +3,7 @@ const Recipe = require('./recipe.model');
 // TODO returns only specific fields
 async function getRecipes(page, limit, query) {
   return Recipe.find(query)
+    .sort({ createdAt: -1 })
     .populate('user', 'name surname')
     .populate('category', 'name')
     .populate('subcategory', 'name')

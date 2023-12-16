@@ -18,7 +18,7 @@ const createRecipeSchema = Joi.object({
       })
       .required(),
   }).required(),
-  image: Joi.array().items(Joi.binary()).required(),
+  image: Joi.array().items(Joi.binary()),
 });
 
 module.exports = {

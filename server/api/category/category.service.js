@@ -9,7 +9,12 @@ async function getCategoriesWithSubcategories() {
   return subcategoryRepository.getCategoriesWithSubcategories();
 }
 
+async function checkIfCategoryIdExists(id) {
+  return categoryRepository.checkIfCategoryIdExists(id);
+}
+
 module.exports = {
   getAllCategories,
   getCategoriesWithSubcategories,
+  checkIfCategoryIdExists,
 };

@@ -24,6 +24,10 @@ const recipeSchema = Schema(
       type: String,
       required: true,
     },
+    instructions: {
+      type: String,
+      required: true,
+    },
     previewImage: {
       type: String,
     },

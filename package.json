@@ -16,6 +16,7 @@
     "express-timeout-handler": "^2.2.2",
     "imagekit": "^4.1.4",
     "joi": "^17.11.0",
+    "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.1",
     "mongoose-sequence": "^5.3.1",

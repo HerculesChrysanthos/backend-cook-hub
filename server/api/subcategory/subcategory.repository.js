@@ -49,7 +49,12 @@ async function getCategoriesWithSubcategories() {
   ]).exec();
 }
 
+async function checkIfSubcategoryIdExists(id) {
+  return Subcategory.exists({ _id: id });
+}
+
 module.exports = {
   getSubcategoriesByCategoryId,
   getCategoriesWithSubcategories,
+  checkIfSubcategoryIdExists,
 };

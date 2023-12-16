@@ -2,6 +2,9 @@ const recipeRepository = require('./recipe.repository');
 const sharpHelper = require('../../helpers/sharp.helper');
 const imagekitClient = require('../../clients/imagekit-client');
 const recipeHelper = require('./recipe.helper');
+const categoryService = require('../category/category.service');
+const subcategoryService = require('../subcategory/subcategory.service');
+const tagService = require('../tag/tag.service');
 
 async function getRecipes(page, limit, searchQuery) {
   const totalRecipes = await recipeRepository.getRecipesCount(searchQuery);
@@ -15,6 +18,28 @@ async function getRecipeById(recipeId) {
 }
 
 async function createRecipe(recipe, image) {
+  const category = await categoryService.checkIfCategoryIdExists(
+    recipe.category
+  );
+
+  if (!category) {
+    throw new Error('Category not found');
+  }
+
+  const subcategory = await subcategoryService.checkIfSubategoryIdExists(
+    recipe.subcategory
+  );
+
+  if (!subcategory) {
+    throw new Error('Subcategory not found');
+  }
+
+  const tags = await tagService.getTagsByIds(recipe.tags);
+
+  if (recipe.tags.length !== tags.length) {
+    throw new Error('Tags not found');
+  }
+
   const imageNames = recipeHelper.prepareImageNames(
     image.originalname,
     recipe.user

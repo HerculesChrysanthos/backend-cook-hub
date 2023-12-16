@@ -77,6 +77,12 @@ async function createRecipe(req, res, next) {
     );
     return res.status(201).json(createdRecipe);
   } catch (error) {
+    console.log(`error: ${error}`);
+
+    if (error.toString().includes('not found')) {
+      error.status = 404;
+    }
+
     return next(error);
   }
 }

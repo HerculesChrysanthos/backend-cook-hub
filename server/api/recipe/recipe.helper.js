@@ -6,10 +6,7 @@ function prepareImageNames(name, user) {
   //const nameWithUnderscores = name.replace(/\s/g, '_');
 
   //console.log('image_after ', nameWithUnderscores);
-  return [
-    `${Date.now()}${user}-1${nameWithUnderscores}`,
-    `${Date.now()}${user}-2${nameWithUnderscores}`,
-  ];
+  return [`${Date.now()}${user}-1${name}`, `${Date.now()}${user}-2${name}`];
 }
 
 function addImagesToRecipe(recipe, imageNames) {

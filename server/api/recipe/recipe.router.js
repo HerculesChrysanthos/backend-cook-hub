@@ -23,7 +23,7 @@ router.post(
   '/',
   auth(),
   multerHelper.prepareImages(1),
-  validator(recipeValidator.createRecipeSchema),
+  //validator(recipeValidator.createRecipeSchema),
   recipesController.createRecipe
 );
 

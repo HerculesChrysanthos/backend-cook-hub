@@ -70,6 +70,7 @@ async function getMyRecipes(req, res, next) {
 async function createRecipe(req, res, next) {
   try {
     const recipe = req.body;
+    console.log('recipe_body ', recipe);
     recipe.user = req.user.userId;
     const createdRecipe = await recipeService.createRecipe(
       req.body,

@@ -4,7 +4,7 @@ const auth = () => {
   return (req, res, next) => {
     console.log('headers ', req.headers);
     console.log('headers me auth ', req.headers?.authorization);
-    console.log('body:  ', req.body);
+    console.log('body:  ', req);
     const token = req.headers?.authorization?.split(' ')[1];
 
     try {

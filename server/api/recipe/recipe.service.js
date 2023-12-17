@@ -39,6 +39,11 @@ async function createRecipe(recipe, image) {
   if (recipe.tags.length !== tags.length) {
     throw new Error('Tags not found');
   }
+  console.log('image_before ', image.originalname);
+
+  image.originalname = image.originalname.replace(/[^a-zA-Z0-9.]/g, '_');
+
+  console.log('image_after ', image.originalname);
 
   const imageNames = recipeHelper.prepareImageNames(
     image.originalname,

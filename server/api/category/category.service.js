@@ -6,7 +6,7 @@ async function getAllCategories() {
 }
 
 async function getCategoriesWithSubcategories() {
-  return subcategoryRepository.getCategoriesWithSubcategories();
+  return categoryRepository.getCategoriesWithSubcategories();
 }
 
 async function checkIfCategoryIdExists(id) {

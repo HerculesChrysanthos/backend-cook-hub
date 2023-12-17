@@ -16,7 +16,7 @@ function addImagesToRecipe(recipe, imageNames) {
 
 function resizeAndUploadImages(buffer, names) {
   const dimensions = [
-    { width: 100, height: 100 },
+    { width: 150, height: 150 },
     { width: 600, height: 400 },
   ];
 

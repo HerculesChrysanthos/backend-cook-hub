@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 
 app.use(
   timeout.handler({
-    timeout: 15000, // 15 seconds in milliseconds
+    timeout: 20000, // 20 seconds in milliseconds
     onTimeout: function (req, res, next) {
       const error = new Error('Request Timeout');
       error.status = 408;

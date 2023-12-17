@@ -63,8 +63,48 @@ async function createRecipe(recipe, image) {
 
   await recipeHelper.resizeAndUploadImages(image.buffer, imageNames);
 
-  //const category = await categoryService.getCategoryById(recipe.category);
   return recipeRepository.createRecipe(recipe);
+}
+
+async function editRecipe(recipeId, recipe, image) {
+  const category = await categoryService.checkIfCategoryIdExists(
+    recipe.category
+  );
+
+  if (!category) {
+    throw new Error('Category not found');
+  }
+
+  const subcategory = await subcategoryService.checkIfSubategoryIdExists(
+    recipe.subcategory
+  );
+
+  if (!subcategory) {
+    throw new Error('Subcategory not found');
+  }
+
+  const tags = await tagService.getTagsByIds(recipe.tags);
+
+  if (recipe.tags.length !== tags.length) {
+    throw new Error('Tags not found');
+  }
+
+  if (image) {
+    image.originalname = image.originalname.replace(/[^a-zA-Z0-9.]/g, '_');
+
+    console.log('image_after ', image.originalname);
+
+    const imageNames = recipeHelper.prepareImageNames(
+      image.originalname,
+      recipe.user
+    );
+
+    recipeHelper.addImagesToRecipe(recipe, imageNames);
+
+    await recipeHelper.resizeAndUploadImages(image.buffer, imageNames);
+  }
+
+  return recipeRepository.editRecipe(recipeId, recipe);
 }
 
 async function deleteRecipeById(recipeId) {
@@ -79,5 +119,6 @@ module.exports = {
   getRecipes,
   getRecipeById,
   createRecipe,
+  editRecipe,
   deleteRecipeById,
 };

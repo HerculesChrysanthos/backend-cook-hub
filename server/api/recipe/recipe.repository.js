@@ -34,6 +34,10 @@ async function createRecipe(recipe) {
   return Recipe.create(recipe);
 }
 
+async function editRecipe(recipeId, recipe) {
+  return Recipe.findOneAndUpdate({ _id: recipeId }, recipe, { new: true });
+}
+
 async function deleteRecipeById(recipeId) {
   return Recipe.findByIdAndDelete(recipeId);
 }
@@ -43,5 +47,6 @@ module.exports = {
   getRecipeById,
   getRecipesCount,
   createRecipe,
+  editRecipe,
   deleteRecipeById,
 };

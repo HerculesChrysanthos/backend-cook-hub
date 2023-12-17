@@ -5,33 +5,43 @@ const hasRecipeAccess = require('../../middleware/recipe-access');
 const multerHelper = require('../../helpers/multer.helper');
 const { validator } = require('../../middleware/validate');
 const recipeValidator = require('./recipe.validator');
-const recipesController = require('./recipe.controller');
+const recipeController = require('./recipe.controller');
 
-router.get('/', recipesController.getRecipes);
+router.get('/', recipeController.getRecipes);
 
 router.get(
   '/my-recipes',
   auth(),
   //hasRecipeAccess,
 
-  recipesController.getMyRecipes
+  recipeController.getMyRecipes
 );
 
-router.get('/:recipeId', recipesController.getRecipeById);
+router.get('/:recipeId', recipeController.getRecipeById);
 
 router.post(
   '/',
   auth(),
   multerHelper.prepareImages(1),
   validator(recipeValidator.createRecipeSchema),
-  recipesController.createRecipe
+  recipeController.createRecipe
+);
+
+router.put(
+  '/:recipeId',
+  auth(),
+  hasRecipeAccess,
+  multerHelper.prepareImages(1),
+  validator(recipeValidator.editRecipeSchema),
+  recipeController.editRecipe
 );
 
 router.delete(
   '/:recipeId',
   auth(),
   hasRecipeAccess,
-  recipesController.deleteRecipeById
+  validator(recipeValidator.editRecipeSchema),
+  recipeController.deleteRecipeById
 );
 
 module.exports = router;

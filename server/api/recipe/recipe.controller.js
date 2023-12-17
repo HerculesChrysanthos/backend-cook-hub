@@ -63,22 +63,13 @@ async function getMyRecipes(req, res, next) {
   }
 }
 
-// async function editRecipe(req, res, next) {
-//   try {
-//     return res.status(200).json({});
-//   } catch (error) {
-//     return next(error);
-//   }
-// try {
-// } catch (error) {} // }
-
 async function createRecipe(req, res, next) {
   try {
     const recipe = req.body;
     console.log('recipe_body ', recipe);
     recipe.user = req.user.userId;
     const createdRecipe = await recipeService.createRecipe(
-      req.body,
+      recipe,
       req.files[0]
     );
     return res.status(201).json(createdRecipe);
@@ -89,6 +80,25 @@ async function createRecipe(req, res, next) {
       error.status = 404;
     }
 
+    return next(error);
+  }
+}
+
+async function editRecipe(req, res, next) {
+  try {
+    const recipe = req.body;
+    const recipeId = req.params.recipeId;
+    console.log('recipe_body ', recipe);
+    recipe.user = req.user.userId;
+
+    const createdRecipe = await recipeService.editRecipe(
+      recipeId,
+      recipe,
+      req.files[0]
+    );
+
+    return res.status(200).json(createdRecipe);
+  } catch (error) {
     return next(error);
   }
 }
@@ -116,5 +126,6 @@ module.exports = {
   getRecipeById,
   getMyRecipes,
   createRecipe,
+  editRecipe,
   deleteRecipeById,
 };

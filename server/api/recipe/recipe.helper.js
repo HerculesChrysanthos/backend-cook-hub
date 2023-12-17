@@ -3,7 +3,7 @@ const imagekitClient = require('../../clients/imagekit-client');
 
 function prepareImageNames(name, user) {
   console.log('image_before ', name);
-  const nameWithUnderscores = name.replace(/ /g, '_');
+  const nameWithUnderscores = name.replace(/\s/g, '_');
 
   console.log('image_after ', nameWithUnderscores);
   return [

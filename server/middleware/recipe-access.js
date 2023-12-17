@@ -9,7 +9,7 @@ async function hasRecipeAccess(req, res, next) {
       throw new Error('Recipe not found');
     }
 
-    if (recipe.user._id !== req.user.userId) {
+    if (recipe.user._id.toString() !== req.user.userId) {
       throw new Error('You have not the permission to access this');
     }
 

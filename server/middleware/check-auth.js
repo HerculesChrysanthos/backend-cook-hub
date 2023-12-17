@@ -1,5 +1,10 @@
 const jwt = require('jsonwebtoken');
 
+function isJWT(token) {
+  const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_.+/=]*$/;
+  return jwtRegex.test(token);
+}
+
 const auth = () => {
   return (req, res, next) => {
     console.log('headers ', req.headers);
@@ -8,7 +13,7 @@ const auth = () => {
     const token = req.headers?.authorization?.split(' ')[1];
 
     try {
-      if (!token) {
+      if (!token || !isJWT(token)) {
         throw new Error('A token is required for authentication');
       }
 

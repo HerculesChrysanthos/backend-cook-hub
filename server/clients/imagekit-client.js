@@ -9,17 +9,35 @@ async function uploadImage(buffer, name) {
       urlEndpoint: 'https://ik.imagekit.io/cookhub/',
     });
 
-    imagekit.upload(
-      {
-        file: buffer,
-        fileName: name,
-        useUniqueFileName: false,
-      },
-      function (error, result) {
-        if (error) console.log(error);
-        else console.log(result);
-      }
-    );
+    // imagekit.upload(
+    //   {
+    //     file: buffer,
+    //     fileName: name,
+    //     useUniqueFileName: false,
+    //   },
+    //   function (error, result) {
+    //     if (error) console.log(error);
+    //     else console.log(result);
+    //   }
+    // );
+
+    return new Promise((resolve, reject) => {
+      imagekit.upload(
+        {
+          file: buffer,
+          fileName: name,
+          useUniqueFileName: false,
+        },
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            console.log('ok');
+            resolve(result);
+          }
+        }
+      );
+    });
   } catch (error) {
     console.log(error);
     throw error;

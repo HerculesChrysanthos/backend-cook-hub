@@ -52,7 +52,7 @@ async function createRecipe(recipe, image) {
 
   recipeHelper.addImagesToRecipe(recipe, imageNames);
 
-  recipeHelper.resizeAndUploadImages(image.buffer, imageNames);
+  await recipeHelper.resizeAndUploadImages(image.buffer, imageNames);
 
   //const category = await categoryService.getCategoryById(recipe.category);
   return recipeRepository.createRecipe(recipe);

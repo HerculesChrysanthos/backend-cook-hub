@@ -14,20 +14,23 @@ function addImagesToRecipe(recipe, imageNames) {
   recipe.mainImage = `https://ik.imagekit.io/cookhub/${imageNames[1]}`;
 }
 
-function resizeAndUploadImages(buffer, names) {
+async function resizeAndUploadImages(buffer, names) {
   const dimensions = [
     { width: 150, height: 150 },
     { width: 600, height: 400 },
   ];
-
-  names.forEach(async (name, index) => {
+  const uploadPromises = names.map(async (name, index) => {
     const resizedImage = await sharpHelper.resizeImage(
       buffer,
       dimensions[index]
     );
 
-    imagekitClient.uploadImage(resizedImage, name);
+    // Return the promise of the uploadImage call
+    return imagekitClient.uploadImage(resizedImage, name);
   });
+
+  // Use Promise.all to wait for all promises to resolve
+  await Promise.all(uploadPromises);
 }
 
 module.exports = {

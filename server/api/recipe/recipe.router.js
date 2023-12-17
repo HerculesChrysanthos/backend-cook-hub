@@ -17,11 +17,7 @@ router.get(
   recipesController.getMyRecipes
 );
 
-router.get(
-  '/:recipeId',
-  validator(recipeValidator.recipeIdSchema),
-  recipesController.getRecipeById
-);
+router.get('/:recipeId', recipesController.getRecipeById);
 
 router.post(
   '/',
@@ -35,7 +31,6 @@ router.delete(
   '/:recipeId',
   auth(),
   hasRecipeAccess,
-  validator(recipeValidator.recipeIdSchema),
   recipesController.deleteRecipeById
 );
 

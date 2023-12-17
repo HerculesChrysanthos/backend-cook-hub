@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const sharpHelper = require('../../helpers/sharp.helper');
 const imagekitClient = require('../../clients/imagekit-client');
 
@@ -33,8 +34,13 @@ async function resizeAndUploadImages(buffer, names) {
   await Promise.all(uploadPromises);
 }
 
+function isValidObjectId(recipeId) {
+  return mongoose.Types.ObjectId.isValid(recipeId);
+}
+
 module.exports = {
   prepareImageNames,
   addImagesToRecipe,
   resizeAndUploadImages,
+  isValidObjectId,
 };

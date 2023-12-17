@@ -1,8 +1,13 @@
 const recipeRepository = require('../api/recipe/recipe.repository');
+const recipeHelper = require('../api/recipe/recipe.helper');
 
 async function hasRecipeAccess(req, res, next) {
   try {
     const recipeId = req.params.recipeId;
+
+    if (!recipeHelper.isValidObjectId(recipeId)) {
+      throw new Error('Recipe not found');
+    }
 
     const recipe = await recipeRepository.getRecipeById(recipeId);
     if (!recipe) {

@@ -14,6 +14,9 @@ async function getRecipes(page, limit, searchQuery) {
 }
 
 async function getRecipeById(recipeId) {
+  if (!recipeHelper.isValidObjectId(recipeId)) {
+    throw new Error('Recipe not found');
+  }
   const recipe = await recipeRepository.getRecipeById(recipeId);
 
   if (!recipe) {

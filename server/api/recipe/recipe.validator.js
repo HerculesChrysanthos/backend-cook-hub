@@ -12,23 +12,11 @@ const createRecipeSchema = Joi.object({
     category: Joi.objectId().required(),
     subcategory: Joi.objectId().required(),
     tags: Joi.array().items(Joi.objectId().required()).required(),
-    // ingredients: Joi.array()
-    //   .items({
-    //     name: Joi.string().required(),
-    //   })
-    //   .required(),
     ingredients: Joi.array().items(Joi.string().required()).required(),
   }).required(),
   image: Joi.array().items(Joi.binary().required()).required(),
 });
 
-const recipeIdSchema = Joi.object({
-  params: Joi.object({
-    recipeId: Joi.objectId().required(),
-  }).required(),
-});
-
 module.exports = {
   createRecipeSchema,
-  recipeIdSchema,
 };

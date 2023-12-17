@@ -8,7 +8,7 @@ async function getRecipes(page, limit, query) {
     .populate('category', 'name')
     .populate('subcategory', 'name')
     .populate('tags', 'name')
-    .skip(page)
+    .skip(page * limit)
     .limit(limit)
     .lean()
     .exec();

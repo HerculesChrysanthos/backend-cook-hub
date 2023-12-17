@@ -61,24 +61,18 @@ const recipeSchema = Schema(
         ref: 'Tag',
       },
     ],
+    // ingredients: [
+    //   {
+    //     name: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //   },
+    // ],
     ingredients: [
       {
-        // ingredient: {
-        //   type: mongoose.Types.ObjectId,
-        //   ref: 'Ingredient',
-        // },
-        name: {
-          type: String,
-          required: true,
-        },
-        // quantity: {
-        //   type: Number,
-        //   min: 0,
-        // },
-        // measurmentType: {
-        //   type: String,
-        //   enum: MEASURMENTS,
-        // },
+        type: String,
+        required: true,
       },
     ],
   },

@@ -22,6 +22,13 @@ const createRecipeSchema = Joi.object({
   image: Joi.array().items(Joi.binary().required()).required(),
 });
 
+const recipeIdSchema = Joi.object({
+  params: Joi.object({
+    recipeId: Joi.objectId().required(),
+  }).required(),
+});
+
 module.exports = {
   createRecipeSchema,
+  recipeIdSchema,
 };

@@ -14,7 +14,13 @@ async function getRecipes(page, limit, searchQuery) {
 }
 
 async function getRecipeById(recipeId) {
-  return recipeRepository.getRecipeById(recipeId);
+  const recipe = await recipeRepository.getRecipeById(recipeId);
+
+  if (!recipe) {
+    throw new Error('Recipe not found');
+  }
+
+  return recipe;
 }
 
 async function createRecipe(recipe, image) {
@@ -58,8 +64,17 @@ async function createRecipe(recipe, image) {
   return recipeRepository.createRecipe(recipe);
 }
 
+async function deleteRecipeById(recipeId) {
+  const deletedRecipe = await recipeRepository.deleteRecipeById(recipeId);
+
+  if (!deletedRecipe) {
+    throw new Error('Recipe not found');
+  }
+}
+
 module.exports = {
   getRecipes,
   getRecipeById,
   createRecipe,
+  deleteRecipeById,
 };

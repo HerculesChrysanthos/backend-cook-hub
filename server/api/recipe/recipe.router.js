@@ -17,7 +17,11 @@ router.get(
   recipesController.getMyRecipes
 );
 
-router.get('/:recipeId', recipesController.getRecipeById);
+router.get(
+  '/:recipeId',
+  validator(recipeValidator.recipeIdSchema),
+  recipesController.getRecipeById
+);
 
 router.post(
   '/',
@@ -25,6 +29,14 @@ router.post(
   multerHelper.prepareImages(1),
   validator(recipeValidator.createRecipeSchema),
   recipesController.createRecipe
+);
+
+router.delete(
+  '/:recipeId',
+  auth(),
+  hasRecipeAccess,
+  validator(recipeValidator.recipeIdSchema),
+  recipesController.deleteRecipeById
 );
 
 module.exports = router;

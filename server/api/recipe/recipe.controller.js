@@ -39,6 +39,11 @@ async function getRecipeById(req, res, next) {
 
     return res.status(200).json(recipe);
   } catch (error) {
+    console.log(`error: ${error}`);
+
+    if (error.toString().includes('not found')) {
+      error.status = 404;
+    }
     return next(error);
   }
 }
@@ -88,9 +93,28 @@ async function createRecipe(req, res, next) {
   }
 }
 
+async function deleteRecipeById(req, res, next) {
+  try {
+    const recipeId = req.params.recipeId;
+
+    await recipeService.deleteRecipeById(recipeId);
+
+    console.log(`${recipeId} deleted`);
+    return res.status(200).json({});
+  } catch (error) {
+    console.log(`error: ${error}`);
+
+    if (error.toString().includes('not found')) {
+      error.status = 404;
+    }
+    return next(error);
+  }
+}
+
 module.exports = {
   getRecipes,
   getRecipeById,
   getMyRecipes,
   createRecipe,
+  deleteRecipeById,
 };

@@ -34,9 +34,14 @@ async function createRecipe(recipe) {
   return Recipe.create(recipe);
 }
 
+async function deleteRecipeById(recipeId) {
+  return Recipe.findByIdAndDelete(recipeId);
+}
+
 module.exports = {
   getRecipes,
   getRecipeById,
   getRecipesCount,
   createRecipe,
+  deleteRecipeById,
 };

@@ -2,7 +2,14 @@ const sharpHelper = require('../../helpers/sharp.helper');
 const imagekitClient = require('../../clients/imagekit-client');
 
 function prepareImageNames(name, user) {
-  return [`${Date.now()}${user}-1${name}`, `${Date.now()}${user}-2${name}`];
+  console.log('image_before ', name);
+  const nameWithUnderscores = name.replace(/ /g, '_');
+
+  console.log('image_after ', nameWithUnderscores);
+  return [
+    `${Date.now()}${user}-1${nameWithUnderscores}`,
+    `${Date.now()}${user}-2${nameWithUnderscores}`,
+  ];
 }
 
 function addImagesToRecipe(recipe, imageNames) {

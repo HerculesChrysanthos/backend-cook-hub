@@ -40,7 +40,6 @@ router.delete(
   '/:recipeId',
   auth(),
   hasRecipeAccess,
-  validator(recipeValidator.editRecipeSchema),
   recipeController.deleteRecipeById
 );
 

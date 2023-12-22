@@ -9,7 +9,6 @@ async function register(req, res, next) {
 
     const response = userHelper.buildUserResponse(dbUser);
 
-    console.log(`SUCCESSFUL_USER_CREATED ${response}`);
     res.status(201).json(response);
   } catch (error) {
     console.log(`error: ${error}`);

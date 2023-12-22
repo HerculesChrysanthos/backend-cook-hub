@@ -1,21 +1,12 @@
 const mongoose = require('mongoose');
-const { MEASURMENTS } = require('../constants');
-//const AutoIncrementFactory = require('mongoose-sequence');
 const Schema = mongoose.Schema;
 
-// autoIncrement.initialize(mongoose.connection);
-
-//const AutoIncrement = AutoIncrementFactory(mongoose.connection);
 const recipeSchema = Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    // friendlyId: {
-    //   type: Number,
-    //   unique: true,
-    // },
     title: {
       type: String,
       required: true,
@@ -61,14 +52,6 @@ const recipeSchema = Schema(
         ref: 'Tag',
       },
     ],
-    // ingredients: [
-    //   {
-    //     name: {
-    //       type: String,
-    //       required: true,
-    //     },
-    //   },
-    // ],
     ingredients: [
       {
         type: String,
@@ -80,12 +63,5 @@ const recipeSchema = Schema(
     timestamps: true,
   }
 );
-
-// recipeSchema.plugin(AutoIncrement, {
-//   inc_field: 'friendlyId',
-//   id: 'Recipe',
-// });
-
-// recipeSchema.plugin(autoIncrement, { field: 'friendlyId' });
 
 module.exports = mongoose.model('Recipe', recipeSchema);

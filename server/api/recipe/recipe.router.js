@@ -9,13 +9,7 @@ const recipeController = require('./recipe.controller');
 
 router.get('/', recipeController.getRecipes);
 
-router.get(
-  '/my-recipes',
-  auth(),
-  //hasRecipeAccess,
-
-  recipeController.getMyRecipes
-);
+router.get('/my-recipes', auth(), recipeController.getMyRecipes);
 
 router.get('/:recipeId', recipeController.getRecipeById);
 

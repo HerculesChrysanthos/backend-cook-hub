@@ -20,7 +20,6 @@ async function uploadImage(buffer, name) {
           if (error) {
             reject(error);
           } else {
-            console.log('ok');
             resolve(result);
           }
         }
